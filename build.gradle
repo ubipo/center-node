@@ -1,0 +1,40 @@
+plugins {
+    id("org.jetbrains.kotlin.jvm").version("1.3.72")
+    id("org.openstreetmap.josm").version("0.7.0")
+}
+
+group "net.pfiers"
+version "v1.0.0"
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+josm {
+    josmCompileVersion = 16239
+    manifest {
+        description = "Create a node at the center of selected elements."
+        mainClass = "net.pfiers.centernode.CenterNode"
+        minJosmVersion = 16239
+        author = "Pieter Fiers (Ubipo)"
+        canLoadAtRuntime = true
+        iconPath = "icons/icon.svg"
+        website = new URL("https://github.com/ubipo/center-node")
+    }
+    i18n {
+        bugReportEmail = "pieter@pfiers.net"
+        copyrightHolder = "Pieter Fiers"
+    }
+}
