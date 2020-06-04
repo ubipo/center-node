@@ -12,10 +12,7 @@ import java.awt.event.ActionEvent
 
 class AddCenterNodeAction : JosmAction(
     ACTION_NAME, ICON_NAME,
-    tr(
-        "Add a node at the center / average of the selected nodes (minimum two). " +
-                "Selecting a way uses all of its nodes as well."
-    ),
+    tr("Add a node at the center / average of the selected nodes (minimum two). Selecting a way uses all of its nodes as well."),
     org.openstreetmap.josm.tools.Shortcut.registerShortcut(
         "tools:addcenternode",
         tr("Tool: {0}", ACTION_NAME),

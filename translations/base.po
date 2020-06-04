@@ -1,0 +1,25 @@
+#: src/main/kotlin/net/pfiers/centernode/AddCenterNodeAction.kt:47
+msgid "Add Center Node"
+msgstr ""
+
+#: src/main/kotlin/net/pfiers/centernode/AddCenterNodeAction.kt:15
+msgid ""
+"Add a node at the center / average of the selected nodes (minimum two). "
+"Selecting a way uses all of its nodes as well."
+msgstr ""
+
+#: src/main/kotlin/net/pfiers/centernode/ReplaceWithCenterNodeAction.kt:16
+msgid ""
+"Replace the selected nodes (minimum two) with a node at the center / "
+"average. Selecting a way uses all of its nodes."
+msgstr ""
+
+#: src/main/kotlin/net/pfiers/centernode/ReplaceWithCenterNodeAction.kt:51
+msgid "Replace with Center Node"
+msgstr ""
+
+#: src/main/kotlin/net/pfiers/centernode/ReplaceWithCenterNodeAction.kt:19
+#: src/main/kotlin/net/pfiers/centernode/AddCenterNodeAction.kt:18
+#, java-format
+msgid "Tool: {0}"
+msgstr ""

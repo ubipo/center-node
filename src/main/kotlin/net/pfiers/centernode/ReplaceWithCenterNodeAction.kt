@@ -13,10 +13,7 @@ import java.awt.event.ActionEvent
 
 class ReplaceWithCenterNodeAction : JosmAction(
         ACTION_NAME, ICON_NAME,
-        I18n.tr(
-                "Replace the selected nodes (minimum two) with a node at the center / average." +
-                        "Selecting a way uses all of its nodes."
-        ),
+        I18n.tr("Replace the selected nodes (minimum two) with a node at the center / average. Selecting a way uses all of its nodes."),
         org.openstreetmap.josm.tools.Shortcut.registerShortcut(
                 "tools:replacewithcenternode",
                 I18n.tr("Tool: {0}", ACTION_NAME),
