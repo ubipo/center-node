@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    packIntoJar("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 }
 
 compileKotlin {
@@ -23,9 +24,9 @@ compileTestKotlin {
 }
 
 josm {
-    josmCompileVersion = 16239
+    josmCompileVersion = 16538
     manifest {
-        description = "Create a node at the center of selected elements."
+        description = "Create a node at the center of the selected elements."
         mainClass = "net.pfiers.centernode.CenterNode"
         minJosmVersion = 16239
         author = "Pieter Fiers (Ubipo)"
