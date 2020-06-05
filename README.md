@@ -13,7 +13,7 @@
 
 ## Installation
 
-TBD
+In JOSM, go to ```Menu Bar > Edit > Preferences > Plugins``` and search for "centernode".
 
 
 ## Bugs, suggestions etc.
