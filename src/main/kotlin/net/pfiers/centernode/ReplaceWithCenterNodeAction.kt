@@ -1,13 +1,15 @@
 package net.pfiers.centernode
 
+import org.openstreetmap.josm.actions.DeleteAction
 import org.openstreetmap.josm.actions.JosmAction
-import org.openstreetmap.josm.command.DeleteCommand
-import org.openstreetmap.josm.command.MoveCommand
-import org.openstreetmap.josm.command.SelectCommand
-import org.openstreetmap.josm.command.SequenceCommand
+import org.openstreetmap.josm.actions.UpdateDataAction
+import org.openstreetmap.josm.actions.UpdateModifiedAction
+import org.openstreetmap.josm.command.*
 import org.openstreetmap.josm.data.UndoRedoHandler
 import org.openstreetmap.josm.data.osm.Node
 import org.openstreetmap.josm.data.osm.OsmPrimitive
+import org.openstreetmap.josm.data.osm.Way
+import org.openstreetmap.josm.data.validation.tests.WayConnectedToArea
 import org.openstreetmap.josm.tools.I18n
 import java.awt.event.ActionEvent
 
@@ -39,10 +41,19 @@ class ReplaceWithCenterNodeAction : JosmAction(
         val first = selectedNodes.first()
         val others = selectedNodes.toList().subList(1, selectedNodes.size)
 
+        val removeNodesCmds = ds.ways.mapNotNull {way ->
+            val nodesToRemove = way.nodes.filter(others::contains)
+            if (nodesToRemove.isNotEmpty())
+                RemoveNodesCommand(ds, way, nodesToRemove.toSet())
+            else
+                null
+        }
+
         val commands = listOf(
-                MoveCommand(first, center),
-                DeleteCommand(ds, others),
-                SelectCommand(ds, listOf(first))
+            MoveCommand(first, center),
+            *(removeNodesCmds.toTypedArray()),
+            DeleteCommand(ds, others),
+            SelectCommand(ds, listOf(first))
         )
         UndoRedoHandler.getInstance().add(SequenceCommand(ACTION_NAME, commands))
     }
