@@ -17,3 +17,26 @@ fun center(nodes: Set<Node>): LatLon {
             nodes.map(Node::lon).average()
     )
 }
+
+/**
+ * Public copy of Way::removeDouble
+ *
+ * @see Way.removeDouble
+ */
+fun removeDouble(nodes: List<Node>): List<Node>? {
+    val copy = nodes.toMutableList()
+    var last: Node? = null
+    var count = copy.size
+    var i = 0
+    while (i < count && count > 2) {
+        val n = copy[i]
+        if (last === n) {
+            copy.removeAt(i)
+            --count
+        } else {
+            last = n
+            ++i
+        }
+    }
+    return copy
+}

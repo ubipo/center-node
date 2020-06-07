@@ -1,15 +1,11 @@
 package net.pfiers.centernode
 
-import org.openstreetmap.josm.actions.DeleteAction
 import org.openstreetmap.josm.actions.JosmAction
-import org.openstreetmap.josm.actions.UpdateDataAction
-import org.openstreetmap.josm.actions.UpdateModifiedAction
 import org.openstreetmap.josm.command.*
 import org.openstreetmap.josm.data.UndoRedoHandler
 import org.openstreetmap.josm.data.osm.Node
 import org.openstreetmap.josm.data.osm.OsmPrimitive
 import org.openstreetmap.josm.data.osm.Way
-import org.openstreetmap.josm.data.validation.tests.WayConnectedToArea
 import org.openstreetmap.josm.tools.I18n
 import java.awt.event.ActionEvent
 
@@ -41,17 +37,27 @@ class ReplaceWithCenterNodeAction : JosmAction(
         val first = selectedNodes.first()
         val others = selectedNodes.toList().subList(1, selectedNodes.size)
 
-        val removeNodesCmds = ds.ways.mapNotNull {way ->
-            val nodesToRemove = way.nodes.filter(others::contains)
-            if (nodesToRemove.isNotEmpty())
-                RemoveNodesCommand(ds, way, nodesToRemove.toSet())
-            else
-                null
+        val changeNodesCmds = ds.ways.mapNotNull { way ->
+            var nodesChanged = false
+            val newWayNodes = way.nodes.map { node ->
+                when {
+                    others.contains(node) -> {
+                        nodesChanged = true
+                        first
+                    }
+                    else -> node
+                }
+            }
+
+            if (!nodesChanged)
+                return@mapNotNull null
+
+            ChangeNodesCommand(ds, way, removeDouble(newWayNodes))
         }
 
         val commands = listOf(
             MoveCommand(first, center),
-            *(removeNodesCmds.toTypedArray()),
+            *(changeNodesCmds.toTypedArray()),
             DeleteCommand(ds, others),
             SelectCommand(ds, listOf(first))
         )
