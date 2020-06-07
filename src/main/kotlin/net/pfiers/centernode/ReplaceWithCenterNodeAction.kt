@@ -52,7 +52,10 @@ class ReplaceWithCenterNodeAction : JosmAction(
             if (!nodesChanged)
                 return@mapNotNull null
 
-            ChangeNodesCommand(ds, way, removeDouble(newWayNodes))
+            return@mapNotNull when (newWayNodes.toSet().size) {
+                1 -> DeleteCommand(ds, way)
+                else -> ChangeNodesCommand(ds, way, removeDouble(newWayNodes))
+            }
         }
 
         val commands = listOf(
