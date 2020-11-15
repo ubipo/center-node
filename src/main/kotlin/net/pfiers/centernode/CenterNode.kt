@@ -14,8 +14,8 @@ import org.openstreetmap.josm.plugins.PluginInformation
 @Suppress("unused")
 class CenterNode(info: PluginInformation?) : Plugin(info) {
     init {
-        val toolsMenu = MainApplication.getMenu().toolsMenu
-        MainMenu.add(toolsMenu, AddCenterNodeAction())
-        MainMenu.add(toolsMenu, ReplaceWithCenterNodeAction())
+        val moreToolsMenu = MainApplication.getMenu().moreToolsMenu
+        MainMenu.add(moreToolsMenu, AddCenterNodeAction())
+        MainMenu.add(moreToolsMenu, ReplaceWithCenterNodeAction())
     }
 }

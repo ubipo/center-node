@@ -4,7 +4,7 @@ plugins {
 }
 
 group "net.pfiers"
-version "v1.0.3"
+version "v1.0.4"
 
 
 repositories {
@@ -24,13 +24,13 @@ compileTestKotlin {
 }
 
 josm {
-    josmCompileVersion = 16538
+    josmCompileVersion = 17084
     manifest {
         description = "Create a node at the center of the selected elements."
         mainClass = "net.pfiers.centernode.CenterNode"
         minJosmVersion = 16239
         author = "Pieter Fiers (Ubipo)"
-        canLoadAtRuntime = true
+        canLoadAtRuntime = false
         iconPath = "icons/icon.svg"
         website = new URL("https://github.com/ubipo/center-node")
     }
